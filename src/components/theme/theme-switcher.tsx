@@ -2,9 +2,9 @@
 
 import { LucideMoon, LucideSun } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 import { Button } from "../ui/button";
-import { useEffect, useState } from "react";
 
 function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();

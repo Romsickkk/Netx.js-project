@@ -1,13 +1,13 @@
-import TicketItem from "@/features/ticket/components/ticket-item";
-
-import { getTicket } from "@/features/ticket/queries/get-ticket";
 import { notFound } from "next/navigation";
 
-type TicketPageParams = {
-  params: { ticketId: string };
-};
+import TicketItem from "@/features/ticket/components/ticket-item";
+import { getTicket } from "@/features/ticket/queries/get-ticket";
 
-export default async function TicketPage({ params }: TicketPageParams) {
+async function TicketPage({
+  params,
+}: {
+  params: Promise<{ ticketId: string }>;
+}) {
   const { ticketId } = await params;
   const ticket = await getTicket(ticketId);
 
@@ -21,3 +21,5 @@ export default async function TicketPage({ params }: TicketPageParams) {
     </div>
   );
 }
+
+export default TicketPage;

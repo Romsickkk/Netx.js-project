@@ -1,5 +1,5 @@
-import simpleImportSort from "eslint-plugin-simple-import-sort";
 import { FlatCompat } from "@eslint/eslintrc";
+import simpleImportSort from "eslint-plugin-simple-import-sort";
 import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -13,6 +13,9 @@ const compat = new FlatCompat({
 
 // Конфигурация ESLint
 const config = [
+  {
+    ignores: ["src/generated/**/*"],
+  },
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 
   {

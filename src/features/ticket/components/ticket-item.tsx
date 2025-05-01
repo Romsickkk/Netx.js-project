@@ -1,14 +1,19 @@
 import clsx from "clsx";
-import { LucideSquareArrowOutUpRight } from "lucide-react";
+import {
+  LucidePencil,
+  LucideSquareArrowOutUpRight,
+  LucideTrash,
+} from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ticketPath } from "@/paths";
+import { Ticket } from "@/generated/prisma";
+import { ticketEditPath, ticketPath } from "@/paths";
 
+import { deleteTicket } from "../actions/delete-ticket";
 import TICKET_ICONS from "../constants";
-import { type Ticket } from "../type";
 
 type TicketItem = {
   ticket: Ticket;
@@ -18,10 +23,26 @@ type TicketItem = {
 function TicketItem({ ticket, isDetail }: TicketItem) {
   const detailButton = (
     <Button asChild size="icon" variant="outline">
-      <Link href={`${ticketPath(ticket.id)}`} className="text-sm">
-        <LucideSquareArrowOutUpRight className="w-6 h-6" />
+      <Link prefetch href={ticketEditPath(ticket.id)} className="text-sm">
+        <LucideSquareArrowOutUpRight className="w-4 h-4 stroke-[1.5]" />
       </Link>
     </Button>
+  );
+
+  const editButton = (
+    <Button variant="outline" size="icon" asChild>
+      <Link prefetch href={`/tickets/${ticket.id}/edit`}>
+        <LucidePencil className="h-4 w-4 stroke-[1.5]" />
+      </Link>
+    </Button>
+  );
+
+  const deleteButton = (
+    <form action={deleteTicket.bind(null, ticket.id)}>
+      <Button variant="outline" size="icon">
+        <LucideTrash className="h-4 w-4 stroke-[1.5]" />
+      </Button>
+    </form>
   );
   return (
     <div
@@ -47,7 +68,20 @@ function TicketItem({ ticket, isDetail }: TicketItem) {
           </span>
         </CardContent>
       </Card>
-      {!isDetail && <div className="flex flex-col gap-y-1">{detailButton}</div>}
+      <div className="flex flex-col gap-y-1">
+        {isDetail ? (
+          <>
+            {editButton}
+            {deleteButton}
+          </>
+        ) : (
+          <>
+            {detailButton}
+            {editButton}
+            {deleteButton}
+          </>
+        )}
+      </div>
     </div>
   );
 }
