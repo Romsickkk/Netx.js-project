@@ -2,11 +2,12 @@ import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 import TicketList from "@/features/ticket/components/ticket-list";
+import TicketUpsertForm from "@/features/ticket/components/ticket-upsert-form";
+import CardCompact from "@/ui/card-compact";
 import Heading from "@/ui/heading";
 import Placeholder from "@/ui/placeholder";
+
 import Spinner from "@/ui/spinner";
-import CardCompact from "@/ui/card-compact";
-import TicketUpsertForm from "@/features/ticket/components/ticket-upsert-form";
 
 function TicketsPage() {
   return (

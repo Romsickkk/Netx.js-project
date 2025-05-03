@@ -1,15 +1,20 @@
 "use client";
 
+import { useActionState, useRef } from "react";
+
+import FieldError from "@/components/form/field-error";
+import Form from "@/components/form/form";
+import SubmitButton from "@/components/form/submit-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Ticket } from "@/generated/prisma";
-import { upsertTicket } from "../actions/upsert-ticket";
-import SubmitButton from "@/components/form/submit-button";
-import { useActionState, useEffect } from "react";
-import FieldError from "@/components/form/field-error";
 import { EMPTY_ACTION_STATE } from "@/components/utils/to-actionState";
-import { useActionFeedback } from "@/components/hooks/use-action-feedback";
+import { Ticket } from "@/generated/prisma";
+
+import { upsertTicket } from "../actions/upsert-ticket";
+import { fromCent } from "@/utils/currency";
+import DatePicker, { ImperativeHandleFromDatePicker } from "@/ui/date-picker";
+
 type TicketUpsertFormProps = {
   ticket?: Ticket;
 };
@@ -20,12 +25,16 @@ function TicketUpsertForm({ ticket }: TicketUpsertFormProps) {
     EMPTY_ACTION_STATE
   );
 
-  useActionFeedback(actionState);
+  const datePickerImperetiveHandleRef =
+    useRef<ImperativeHandleFromDatePicker>(null);
+
+  function handleSuccess() {
+    datePickerImperetiveHandleRef.current?.reset();
+  }
 
   return (
-    <form action={action} className="flex flex-col gap-y-2">
-      {/* <Input name="id" type="hidden" defaultValue={ticket.id} /> */}
-
+    <Form action={action} actionState={actionState} onSuccsess={handleSuccess}>
+      {/* <Input name="id" type="hidden" defaultValue={ticket.id} /> */}{" "}
       <Label htmlFor="title">Title</Label>
       <Input
         id="content"
@@ -36,7 +45,6 @@ function TicketUpsertForm({ ticket }: TicketUpsertFormProps) {
         }
       />
       <FieldError actionState={actionState} name="title" />
-
       <Label htmlFor="Content">Content</Label>
       <Textarea
         id="content"
@@ -46,8 +54,40 @@ function TicketUpsertForm({ ticket }: TicketUpsertFormProps) {
         }
       />
       <FieldError actionState={actionState} name="content" />
+      <div className="flex gap-x-2 mb-1">
+        <div className="w-1/2">
+          <Label htmlFor="deadline">Deadline</Label>
+
+          <DatePicker
+            // key={actionState.timestamp}
+            id="dealdline"
+            name="deadline"
+            defaultValue={
+              (actionState.payload?.get("deadline") as string) ??
+              ticket?.deadline
+            }
+            imperetiveHandleRef={datePickerImperetiveHandleRef}
+          />
+          <FieldError actionState={actionState} name="deadline" />
+        </div>
+
+        <div className="w-1/2">
+          <Label htmlFor="bounty">Bounty ($)</Label>
+          <Input
+            id="bounty"
+            name="bounty"
+            type="number"
+            step=".01"
+            defaultValue={
+              (actionState.payload?.get("bounty") as string) ??
+              (ticket?.bounty ? fromCent(ticket?.bounty) : "")
+            }
+          />
+          <FieldError actionState={actionState} name="bounty" />
+        </div>
+      </div>
       <SubmitButton label={ticket ? "Edit" : "Create"} />
-    </form>
+    </Form>
   );
 }
 

@@ -123,7 +123,9 @@ exports.Prisma.TicketScalarFieldEnum = {
   updatedAt: 'updatedAt',
   title: 'title',
   content: 'content',
-  status: 'status'
+  status: 'status',
+  deadline: 'deadline',
+  bounty: 'bounty'
 };
 
 exports.Prisma.SortOrder = {

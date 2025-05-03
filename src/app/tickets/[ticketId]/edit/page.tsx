@@ -1,7 +1,8 @@
+import { notFound } from "next/navigation";
+
 import TicketUpsertForm from "@/features/ticket/components/ticket-upsert-form";
 import { getTicket } from "@/features/ticket/queries/get-ticket";
 import CardCompact from "@/ui/card-compact";
-import { notFound } from "next/navigation";
 
 async function TicketEditPage({
   params,
