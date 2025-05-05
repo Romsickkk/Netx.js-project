@@ -3,7 +3,6 @@ import {
   LucideMoreVertical,
   LucidePencil,
   LucideSquareArrowOutUpRight,
-  LucideTrash,
 } from "lucide-react";
 import Link from "next/link";
 import React from "react";
@@ -16,12 +15,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import ConfirmDialog from "@/components/ui/confirm-dialog";
 import { Ticket } from "@/generated/prisma";
 import { ticketEditPath } from "@/paths";
 import { toCurrencyFromCent } from "@/utils/currency";
 
-import { deleteTicket } from "../actions/delete-ticket";
 import { TICKET_ICONS } from "../constants";
 import TicketMoreMenu from "./ticket-more-menu";
 
@@ -45,17 +42,6 @@ function TicketItem({ ticket, isDetail }: TicketItem) {
         <LucidePencil className="h-4 w-4 stroke-[1.5]" />
       </Link>
     </Button>
-  );
-
-  const deleteButton = (
-    <ConfirmDialog
-      action={deleteTicket.bind(null, ticket.id)}
-      trigger={
-        <Button variant="outline" size="icon">
-          <LucideTrash className="h-4 w-4 stroke-[1.5]" />
-        </Button>
-      }
-    />
   );
 
   const moreMenu = (

@@ -19,7 +19,7 @@ type UseConfirmDialogProps = {
   title?: string;
   descriptin?: string;
   action: () => Promise<ActionState>;
-  trigger: React.ReactElement<HTMLAttributes<any>>;
+  trigger: React.ReactElement<HTMLAttributes<HTMLButtonElement>>;
 };
 
 function useConfirmDialog({
@@ -49,7 +49,7 @@ function useConfirmDialog({
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction asChild>
             <Form
-              action={action}
+              action={formAction}
               actionState={actionState}
               onSuccsess={handleSuccess}
             >
