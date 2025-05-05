@@ -9,7 +9,7 @@ import {
   type ActionState,
   fromErrorToActionState,
   toActionState,
-} from "@/components/utils/to-actionState";
+} from "@/components/utils/to-action-state";
 import { prisma } from "@/lib/prisma";
 import { ticketPath, ticketsPath } from "@/paths";
 import { toCent } from "@/utils/currency";

@@ -3,16 +3,26 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { setCookieByKey } from "@/actions/cookies";
+import {
+  ActionState,
+  fromErrorToActionState,
+} from "@/components/utils/to-action-state";
 import { prisma } from "@/lib/prisma";
 import { ticketsPath } from "@/paths";
 
-export async function deleteTicket(id: string) {
-  await prisma.ticket.delete({
-    where: { id },
-  });
+export async function deleteTicket(id: string): Promise<ActionState> {
+  try {
+    await prisma.ticket.delete({
+      where: { id },
+    });
+    console.log("not err");
+  } catch (error) {
+    console.log("err");
+
+    return fromErrorToActionState(error);
+  }
 
   revalidatePath(ticketsPath());
-
-  await setCookieByKey("toast", "Ticket deleted");
+  setCookieByKey("toast", "Ticket deleted");
   redirect(ticketsPath());
 }
