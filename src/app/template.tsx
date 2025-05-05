@@ -1,4 +1,4 @@
-import RedirectToast from "@/ui/redirect-toast";
+import RedirectToast from "../ui/redirect-toast";
 
 type RootTemplateProps = { children: React.ReactNode };
 

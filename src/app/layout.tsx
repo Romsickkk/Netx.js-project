@@ -5,7 +5,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import ThemeProvider from "@/components/theme/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
-import Header from "@/ui/header";
+import Header from "../ui/header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
