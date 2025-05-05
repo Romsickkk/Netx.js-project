@@ -6,7 +6,7 @@ import TicketUpsertForm from "@/features/ticket/components/ticket-upsert-form";
 import CardCompact from "../../ui/card-compact";
 import Heading from "../../ui/heading";
 import Placeholder from "../../ui/placeholder";
-import Spinner from "../../ui/spinner";
+import Spinner from "@/ui/spinner";
 
 function TicketsPage() {
   return (
