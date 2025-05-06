@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { ticketsPath } from "@/paths";
-import Heading from "@/ui/heading";
+import Heading from "@/ui/Heading";
 
 function HomePage() {
   return (

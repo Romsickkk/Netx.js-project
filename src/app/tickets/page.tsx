@@ -3,11 +3,11 @@ import { ErrorBoundary } from "react-error-boundary";
 
 import TicketList from "@/features/ticket/components/ticket-list";
 import TicketUpsertForm from "@/features/ticket/components/ticket-upsert-form";
-import Spinner from "@/ui/spinner";
+import Spinner from "@/ui/Spinner";
 
 import CardCompact from "../../ui/card-compact";
-import Heading from "../../ui/heading";
-import Placeholder from "../../ui/placeholder";
+import Heading from "../../ui/Heading";
+import Placeholder from "../../ui/Placeholder";
 
 function TicketsPage() {
   return (
