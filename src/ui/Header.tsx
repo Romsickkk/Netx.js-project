@@ -1,3 +1,4 @@
+"use client";
 import { LucideHouse } from "lucide-react";
 import Link from "next/link";
 import React from "react";
@@ -19,14 +20,14 @@ function Header() {
       </div>
       <div className="flex items-center gap-x-1">
         <ThemeSwitcher />
-        {/* <Button asChild variant={"outline"}> */}
-        <Link
-          href={ticketsPath()}
-          className={buttonVariants({ variant: "default" })}
-        >
-          Tickets
-        </Link>
-        {/* </Button> */}
+        <Button asChild variant={"outline"}>
+          <Link
+            href={ticketsPath()}
+            className={buttonVariants({ variant: "default" })}
+          >
+            Tickets
+          </Link>
+        </Button>
       </div>
     </nav>
   );
