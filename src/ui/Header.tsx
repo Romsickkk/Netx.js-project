@@ -5,7 +5,32 @@ import React from "react";
 
 import ThemeSwitcher from "@/components/theme/theme-switcher";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { homePath, ticketsPath } from "@/paths";
+import { homePath, singInPath, singUpPath, ticketsPath } from "@/paths";
+
+const navItems = (
+  <>
+    <ThemeSwitcher />
+    <Link
+      href={ticketsPath()}
+      className={buttonVariants({ variant: "default" })}
+    >
+      Tickets
+    </Link>
+
+    <Link
+      href={singUpPath()}
+      className={buttonVariants({ variant: "outline" })}
+    >
+      Sing Up
+    </Link>
+    <Link
+      href={singInPath()}
+      className={buttonVariants({ variant: "outline" })}
+    >
+      Sing In
+    </Link>
+  </>
+);
 
 function Header() {
   return (
@@ -18,17 +43,7 @@ function Header() {
           </Link>
         </Button>
       </div>
-      <div className="flex items-center gap-x-1">
-        <ThemeSwitcher />
-        <Button asChild variant={"outline"}>
-          <Link
-            href={ticketsPath()}
-            className={buttonVariants({ variant: "default" })}
-          >
-            Tickets
-          </Link>
-        </Button>
-      </div>
+      <div className="flex items-center gap-x-1">{navItems}</div>
     </nav>
   );
 }

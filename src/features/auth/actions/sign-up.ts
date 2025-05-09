@@ -1,0 +1,65 @@
+"use server";
+
+import {
+  type ActionState,
+  fromErrorToActionState,
+  toActionState,
+} from "@/components/utils/to-action-state";
+import { prisma } from "@/lib/prisma";
+import bcrypt from "bcryptjs";
+import { z } from "zod";
+
+const signUpSchema = z
+  .object({
+    username: z
+      .string()
+      .min(1)
+      .max(191)
+      .refine(
+        (value) => !value.includes(" "),
+        "Username cannot contain spaces"
+      ),
+    email: z.string().min(1, { message: "Is required" }).max(191).email(),
+    password: z.string().min(6).max(191),
+    confirmPassword: z.string().min(6).max(191),
+  })
+  .superRefine(({ password, confirmPassword }, ctx) => {
+    if (password !== confirmPassword) {
+      ctx.addIssue({
+        code: "custom",
+        message: "Password do not match",
+        path: ["confirmPassword"],
+      });
+    }
+  });
+
+export async function signUp(
+  _actionState: ActionState,
+  formData: FormData
+): Promise<ActionState> {
+  try {
+    const { username, email, password, confirmPassword } = signUpSchema.parse(
+      Object.fromEntries(formData)
+    );
+    const existingUser = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (existingUser) {
+      return toActionState("ERROR", "User with this email already exists");
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    await prisma.user.create({
+      data: {
+        username,
+        email,
+        password: hashedPassword,
+      },
+    });
+    return toActionState("SUCCESS", "Sign up successful", formData);
+  } catch (error) {
+    return fromErrorToActionState(error, formData);
+  }
+}
