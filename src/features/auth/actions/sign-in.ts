@@ -37,7 +37,7 @@ export async function signIn(
         message: "Incorrect email or password",
         payload: formData,
         fieldErrors: {
-          email: ["Incorrect email or password"],
+          password: ["Incorrect email or password"],
         },
         timestamp: Date.now(),
       };

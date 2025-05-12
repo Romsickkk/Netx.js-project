@@ -19,7 +19,7 @@ const signUpSchema = z
         (value) => !value.includes(" "),
         "Username cannot contain spaces"
       ),
-    email: z.string().min(1, { message: "Is required" }).max(191).email(),
+    email: z.string().min(1, { message: "Email is required" }).max(191).email(),
     password: z.string().min(6).max(191),
     confirmPassword: z.string().min(6).max(191),
   })
@@ -46,9 +46,20 @@ export async function signUp(
     });
 
     if (existingUser) {
-      return toActionState("ERROR", "User with this email already exists");
+      return toActionState(
+        "ERROR",
+        "User with this email already exists",
+        formData
+      );
     }
 
+    const existinUsername = await prisma.user.findUnique({
+      where: { username },
+    });
+
+    if (existinUsername) {
+      return toActionState("ERROR", "User with this username already exists");
+    }
     const hashedPassword = await bcrypt.hash(password, 10);
 
     await prisma.user.create({

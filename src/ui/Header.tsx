@@ -1,38 +1,57 @@
 "use client";
-import { LucideHouse } from "lucide-react";
+import { LucideHouse, LucideLogOut } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import ThemeSwitcher from "@/components/theme/theme-switcher";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { homePath, singInPath, singUpPath, ticketsPath } from "@/paths";
+import SubmitButton from "@/components/form/submit-button";
 
-const navItems = (
-  <>
-    <ThemeSwitcher />
-    <Link
-      href={ticketsPath()}
-      className={buttonVariants({ variant: "default" })}
-    >
-      Tickets
-    </Link>
-
-    <Link
-      href={singUpPath()}
-      className={buttonVariants({ variant: "outline" })}
-    >
-      Sing Up
-    </Link>
-    <Link
-      href={singInPath()}
-      className={buttonVariants({ variant: "outline" })}
-    >
-      Sing In
-    </Link>
-  </>
-);
+import { getAuth } from "@/features/auth/queries/get-auth";
+import { Session } from "next-auth";
+import { signOut, useSession } from "next-auth/react";
 
 function Header() {
+  const { data: session } = useSession();
+
+  const navItems = (
+    <>
+      <ThemeSwitcher />
+      {session ? (
+        <>
+          <Link
+            href={ticketsPath()}
+            className={buttonVariants({ variant: "default" })}
+          >
+            Tickets
+          </Link>
+          <Button
+            onClick={() => signOut({ callbackUrl: singInPath() })}
+            variant="outline"
+          >
+            <LucideLogOut /> Log Out
+          </Button>
+        </>
+      ) : (
+        <>
+          <Link
+            href={singUpPath()}
+            className={buttonVariants({ variant: "outline" })}
+          >
+            Sing Up
+          </Link>
+          <Link
+            href={singInPath()}
+            className={buttonVariants({ variant: "outline" })}
+          >
+            Sing In
+          </Link>
+        </>
+      )}
+    </>
+  );
+
   return (
     <nav className="supports-backdrop-blur:bg-background/60 fixed left-0 right-0 top-0 z-20 border-b bg-background/95 backdrop-blur w-full flex py-2.5 px-5 justify-between">
       <div className="flex items-center gap-x-1">

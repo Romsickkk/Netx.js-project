@@ -55,7 +55,7 @@ export function toActionState(
     status,
     message,
     fieldErrors: {},
+    payload: formData,
     timestamp: Date.now(),
-    formData,
   };
 }
