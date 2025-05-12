@@ -1,16 +1,11 @@
 "use client";
 import { LucideHouse, LucideLogOut } from "lucide-react";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import { signOut, useSession } from "next-auth/react";
 
 import ThemeSwitcher from "@/components/theme/theme-switcher";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { homePath, singInPath, singUpPath, ticketsPath } from "@/paths";
-import SubmitButton from "@/components/form/submit-button";
-
-import { getAuth } from "@/features/auth/queries/get-auth";
-import { Session } from "next-auth";
-import { signOut, useSession } from "next-auth/react";
 
 function Header() {
   const { data: session } = useSession();
@@ -30,7 +25,7 @@ function Header() {
             onClick={() => signOut({ callbackUrl: singInPath() })}
             variant="outline"
           >
-            <LucideLogOut /> Log Out
+            Log Out <LucideLogOut />
           </Button>
         </>
       ) : (
@@ -43,7 +38,7 @@ function Header() {
           </Link>
           <Link
             href={singInPath()}
-            className={buttonVariants({ variant: "outline" })}
+            className={buttonVariants({ variant: "default" })}
           >
             Sing In
           </Link>

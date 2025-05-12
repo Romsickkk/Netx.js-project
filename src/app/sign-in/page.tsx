@@ -1,8 +1,9 @@
+import Link from "next/link";
+import React from "react";
+
 import SignInForm from "@/features/auth/components/sign-in-form";
 import { passwordForgotPath, singUpPath } from "@/paths";
 import CardCompact from "@/ui/card-compact";
-import Link from "next/link";
-import React from "react";
 
 function SignInPage() {
   return (

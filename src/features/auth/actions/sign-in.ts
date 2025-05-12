@@ -1,10 +1,11 @@
+import { signIn as nextAuthSignIn } from "next-auth/react";
+import { z } from "zod";
+
 import {
   ActionState,
   fromErrorToActionState,
   toActionState,
 } from "@/components/utils/to-action-state";
-import { signIn as nextAuthSignIn } from "next-auth/react";
-import { z } from "zod";
 
 const signInSchema = z.object({
   email: z

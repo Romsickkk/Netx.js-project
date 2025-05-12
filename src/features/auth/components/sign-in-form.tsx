@@ -1,14 +1,15 @@
 "use client";
+import { redirect } from "next/navigation";
+import { useActionState, useEffect } from "react";
+
 import FieldError from "@/components/form/field-error";
 import Form from "@/components/form/form";
 import SubmitButton from "@/components/form/submit-button";
 import { Input } from "@/components/ui/input";
 import { EMPTY_ACTION_STATE } from "@/components/utils/to-action-state";
-import { useActionState, useEffect } from "react";
-import { signIn } from "../actions/sign-in";
-
-import { redirect } from "next/navigation";
 import { ticketsPath } from "@/paths";
+
+import { signIn } from "../actions/sign-in";
 
 function SignInForm() {
   const [actionState, action] = useActionState(signIn, EMPTY_ACTION_STATE);

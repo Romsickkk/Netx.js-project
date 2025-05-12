@@ -1,16 +1,18 @@
 "use client";
-import SubmitButton from "@/components/form/submit-button";
-
-import { Input } from "@/components/ui/input";
 import React, { useActionState } from "react";
-import { signUp } from "../actions/sign-up";
-import { EMPTY_ACTION_STATE } from "@/components/utils/to-action-state";
-import Form from "@/components/form/form";
+
 import FieldError from "@/components/form/field-error";
+import Form from "@/components/form/form";
+import SubmitButton from "@/components/form/submit-button";
+import { Input } from "@/components/ui/input";
+import { EMPTY_ACTION_STATE } from "@/components/utils/to-action-state";
+
+import { signUp } from "../actions/sign-up";
 import { useSignUpLogin } from "../hooks/use-sing-up-login";
 
 function SignUpForm() {
   const [actionState, action] = useActionState(signUp, EMPTY_ACTION_STATE);
+
   useSignUpLogin(actionState);
 
   return (

@@ -1,8 +1,9 @@
+import Link from "next/link";
+import React from "react";
+
 import SignUpForm from "@/features/auth/components/sign-up-form";
 import { singInPath } from "@/paths";
 import CardCompact from "@/ui/card-compact";
-import Link from "next/link";
-import React from "react";
 
 function SignUpPage() {
   return (

@@ -1,13 +1,14 @@
 "use server";
 
+import bcrypt from "bcryptjs";
+import { z } from "zod";
+
 import {
   type ActionState,
   fromErrorToActionState,
   toActionState,
 } from "@/components/utils/to-action-state";
 import { prisma } from "@/lib/prisma";
-import bcrypt from "bcryptjs";
-import { z } from "zod";
 
 const signUpSchema = z
   .object({
@@ -38,7 +39,7 @@ export async function signUp(
   formData: FormData
 ): Promise<ActionState> {
   try {
-    const { username, email, password, confirmPassword } = signUpSchema.parse(
+    const { username, email, password } = signUpSchema.parse(
       Object.fromEntries(formData)
     );
     const existingUser = await prisma.user.findUnique({
