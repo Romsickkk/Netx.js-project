@@ -8,8 +8,6 @@ import { ActionState } from "@/components/utils/to-action-state";
 
 export function useSignUpLogin(actionState: ActionState) {
   useEffect(() => {
-    console.log(actionState.status);
-
     if (actionState.status === "SUCCESS") {
       const email = actionState.payload?.get("email") as string;
       const password = actionState.payload?.get("password") as string;

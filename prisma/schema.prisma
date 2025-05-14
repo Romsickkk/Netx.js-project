@@ -21,20 +21,24 @@ model User {
   username  String @unique
   email     String @unique
   password  String
- 
+  tickets   Ticket[]
 }
 
 
 
 model Ticket {
-  id String @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title String
-  content String @db.VarChar(1024)
-  status TicketStatus @default(OPEN)
-  deadline String 
-  bounty Int 
+  id        String         @id @default(cuid())
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  title     String
+  content   String         @db.VarChar(1024)
+  status    TicketStatus   @default(OPEN)
+  deadline  String 
+  bounty    Int 
+  userId    String
+  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 enum TicketStatus {

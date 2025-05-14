@@ -15,10 +15,7 @@ export async function deleteTicket(id: string): Promise<ActionState> {
     await prisma.ticket.delete({
       where: { id },
     });
-    console.log("not err");
   } catch (error) {
-    console.log("err");
-
     return fromErrorToActionState(error);
   }
 

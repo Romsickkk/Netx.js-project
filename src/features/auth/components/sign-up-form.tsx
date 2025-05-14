@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { EMPTY_ACTION_STATE } from "@/components/utils/to-action-state";
 
 import { signUp } from "../actions/sign-up";
-import { useSignUpLogin } from "../hooks/use-sing-up-login";
+import { useSignUpLogin } from "../hooks/use-sign-up-login";
 
 function SignUpForm() {
   const [actionState, action] = useActionState(signUp, EMPTY_ACTION_STATE);

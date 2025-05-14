@@ -16,10 +16,11 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(cuid())
-  username String @unique
-  email    String @unique
+  id       String   @id @default(cuid())
+  username String   @unique
+  email    String   @unique
   password String
+  tickets  Ticket[]
 }
 
 model Ticket {
@@ -31,6 +32,10 @@ model Ticket {
   status    TicketStatus @default(OPEN)
   deadline  String
   bounty    Int
+  userId    String
+  user      User         @relation(fields: [userId], references: [id])
+
+  @@index([userId])
 }
 
 enum TicketStatus {

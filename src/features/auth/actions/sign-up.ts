@@ -1,6 +1,6 @@
 "use server";
 
-import bcrypt from "bcryptjs";
+import argon2 from "argon2";
 import { z } from "zod";
 
 import {
@@ -61,7 +61,12 @@ export async function signUp(
     if (existinUsername) {
       return toActionState("ERROR", "User with this username already exists");
     }
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await argon2.hash(password, {
+      type: argon2.argon2id,
+      memoryCost: 2 ** 16,
+      timeCost: 3,
+      parallelism: 1,
+    });
 
     await prisma.user.create({
       data: {

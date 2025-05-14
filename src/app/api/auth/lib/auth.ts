@@ -1,7 +1,7 @@
-import bcrypt from "bcryptjs";
 import type { DefaultSession } from "next-auth";
 import { type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import argon2 from "argon2";
 
 import { prisma } from "@/lib/prisma";
 
@@ -34,10 +34,7 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        console.log("do");
-
         if (!credentials?.email || !credentials?.password) return null;
-        console.log("posle");
 
         const user = await prisma.user.findUnique({
           where: { email: credentials.email },
@@ -45,9 +42,9 @@ export const authOptions: NextAuthOptions = {
 
         if (!user) return null;
 
-        const isValid = await bcrypt.compare(
-          credentials.password,
-          user.password
+        const isValid = await argon2.verify(
+          user.password,
+          credentials.password
         );
 
         if (!isValid) return null;

@@ -4,8 +4,18 @@ import React from "react";
 import SignInForm from "@/features/auth/components/sign-in-form";
 import { passwordForgotPath, singUpPath } from "@/paths";
 import CardCompact from "@/ui/card-compact";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/lib/auth";
+import { redirect } from "next/navigation";
 
-function SignInPage() {
+async function SignInPage() {
+  const session = await getServerSession(authOptions);
+  console.log(session);
+
+  if (session) {
+    redirect("/tickets");
+  }
+
   return (
     <div className="fixed inset-0 flex items-center justify-center">
       <CardCompact

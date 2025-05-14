@@ -1,5 +1,5 @@
 "use client";
-import { redirect } from "next/navigation";
+
 import { useActionState, useEffect } from "react";
 
 import FieldError from "@/components/form/field-error";
@@ -11,12 +11,16 @@ import { ticketsPath } from "@/paths";
 
 import { signIn } from "../actions/sign-in";
 
+import { useRouter } from "next/navigation";
+
 function SignInForm() {
+  const router = useRouter();
+
   const [actionState, action] = useActionState(signIn, EMPTY_ACTION_STATE);
 
   useEffect(() => {
     if (actionState.status === "SUCCESS") {
-      redirect(ticketsPath());
+      router.push(ticketsPath());
     }
   }, [actionState]);
 
