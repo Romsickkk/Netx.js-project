@@ -5,16 +5,22 @@ import { Button } from "../ui/button";
 
 type SubmitButtonProps = {
   label: string;
+  icon?: React.ReactElement;
 };
 
-const SubmitButton = ({ label }: SubmitButtonProps) => {
+const SubmitButton = ({ label, icon }: SubmitButtonProps) => {
   const { pending } = useFormStatus();
 
   return (
-    <Button disabled={pending} type="submit">
-      {pending && <LucideLoaderCircle className="mr-2 h-4 w-4 animate-spin" />}
-      {label}
-    </Button>
+    <>
+      <Button disabled={pending} type="submit">
+        {icon}
+        {pending && (
+          <LucideLoaderCircle className="mr-2 h-4 w-4 animate-spin" />
+        )}
+        {label}
+      </Button>
+    </>
   );
 };
 

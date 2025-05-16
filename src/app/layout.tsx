@@ -7,6 +7,10 @@ import ThemeProvider from "@/components/theme/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import Header from "@/ui/Header";
 
+
+import SessionProvider from "./api/auth/lib/session-provider";
+
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -32,13 +36,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider>
-          <Header />
-          <main className="min-h-screen flex-1 overflow-y-auto overflow-x-hidden py-24 px-8 bg-secondary/20 flex flex-col">
-            {children}
-          </main>
-          <Toaster expand />
-        </ThemeProvider>
+        <SessionProvider>
+          <ThemeProvider>
+            <Header />
+            <main className="min-h-screen flex-1 overflow-y-auto overflow-x-hidden py-24 px-8 bg-secondary/20 flex flex-col">
+              {children}
+            </main>
+            <Toaster expand />
+          </ThemeProvider>
+        </SessionProvider>
       </body>
     </html>
   );

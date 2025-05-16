@@ -3,13 +3,15 @@ import { ErrorBoundary } from "react-error-boundary";
 
 import TicketList from "@/features/ticket/components/ticket-list";
 import TicketUpsertForm from "@/features/ticket/components/ticket-upsert-form";
+
+import Placeholder from "@/ui/Placeholder";
+
 import Spinner from "@/ui/Spinner";
 
 import CardCompact from "../../ui/card-compact";
 import Heading from "../../ui/Heading";
-import Placeholder from "../../ui/Placeholder";
 
-function TicketsPage() {
+async function TicketsPage() {
   return (
     <div className="flex-1 flex flex-col gap-y-8">
       <Heading title="Tickets" description="All your tickets at one place" />

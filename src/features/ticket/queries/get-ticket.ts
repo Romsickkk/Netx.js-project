@@ -5,5 +5,12 @@ export async function getTicket(id: string) {
     where: {
       id,
     },
+    include: {
+      user: {
+        select: {
+          username: true,
+        },
+      },
+    },
   });
 }
