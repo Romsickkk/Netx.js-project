@@ -1,5 +1,8 @@
 import { notFound } from "next/navigation";
+import { getServerSession } from "next-auth";
 
+import { authOptions } from "@/app/api/auth/lib/auth";
+import { isOwner } from "@/features/auth/utils/is-owner";
 import TicketUpsertForm from "@/features/ticket/components/ticket-upsert-form";
 import { getTicket } from "@/features/ticket/queries/get-ticket";
 import CardCompact from "@/ui/card-compact";
@@ -9,9 +12,15 @@ async function TicketEditPage({
 }: {
   params: Promise<{ ticketId: string }>;
 }) {
+  const session = await getServerSession(authOptions);
+
   const { ticketId } = await params;
   const ticket = await getTicket(ticketId);
-  if (!ticket) {
+
+  const isTicketOwner = isOwner(session?.user, ticket);
+  console.log(isTicketOwner);
+
+  if (!ticket || !isTicketOwner) {
     notFound();
   }
   return (

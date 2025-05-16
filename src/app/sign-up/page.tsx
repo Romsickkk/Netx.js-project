@@ -1,22 +1,23 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import React from "react";
+import { toast } from "sonner";
 
 import SignUpForm from "@/features/auth/components/sign-up-form";
-import { singInPath } from "@/paths";
+import { getAuth } from "@/features/auth/queries/get-auth";
+import { singInPath, ticketsPath } from "@/paths";
 import CardCompact from "@/ui/card-compact";
-import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/lib/auth";
-import { redirect } from "next/navigation";
 
 async function SignUpPage() {
-  const session = await getServerSession(authOptions);
+  const session = await getAuth();
 
   if (session) {
-    redirect("/tickets");
+    toast.error("Only sing up ussers can check tickets");
+    redirect(ticketsPath());
   }
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center">
+    <div className="absolute inset-0 flex items-center justify-center">
       <CardCompact
         title="Sign Up"
         description="Create an account to get started"

@@ -1,7 +1,7 @@
+import argon2 from "argon2";
 import type { DefaultSession } from "next-auth";
 import { type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import argon2 from "argon2";
 
 import { prisma } from "@/lib/prisma";
 

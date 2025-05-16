@@ -1,23 +1,21 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import React from "react";
 
 import SignInForm from "@/features/auth/components/sign-in-form";
-import { passwordForgotPath, singUpPath } from "@/paths";
+import { getAuth } from "@/features/auth/queries/get-auth";
+import { passwordForgotPath, singUpPath, ticketsPath } from "@/paths";
 import CardCompact from "@/ui/card-compact";
-import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/lib/auth";
-import { redirect } from "next/navigation";
 
 async function SignInPage() {
-  const session = await getServerSession(authOptions);
-  console.log(session);
+  const session = await getAuth();
 
   if (session) {
-    redirect("/tickets");
+    redirect(ticketsPath());
   }
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center">
+    <div className="absolute inset-0 flex items-center justify-center">
       <CardCompact
         title="Sign In"
         description="Sing in to your account"

@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useActionState, useEffect } from "react";
 
 import FieldError from "@/components/form/field-error";
@@ -10,8 +11,6 @@ import { EMPTY_ACTION_STATE } from "@/components/utils/to-action-state";
 import { ticketsPath } from "@/paths";
 
 import { signIn } from "../actions/sign-in";
-
-import { useRouter } from "next/navigation";
 
 function SignInForm() {
   const router = useRouter();
