@@ -1,15 +1,13 @@
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
+import { getAuth } from "@/features/auth/queries/get-auth";
 import TicketList from "@/features/ticket/components/ticket-list";
 import TicketUpsertForm from "@/features/ticket/components/ticket-upsert-form";
-import Placeholder from "@/ui/Placeholder";
-import Spinner from "@/ui/Spinner";
-
-import { getAuth } from "@/features/auth/queries/get-auth";
-
 import CardCompact from "@/ui/card-compact";
 import Heading from "@/ui/Heading";
+import Placeholder from "@/ui/Placeholder";
+import Spinner from "@/ui/Spinner";
 
 async function TicketsPage() {
   const session = await getAuth();

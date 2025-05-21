@@ -8,10 +8,10 @@ import {
   fromErrorToActionState,
   toActionState,
 } from "@/components/utils/to-action-state";
-import { prisma } from "@/lib/prisma";
-import { ticketsPath } from "@/paths";
 import { getAuthOrRedirect } from "@/features/auth/queries/get-auth-or-redirect";
 import { isOwner } from "@/features/auth/utils/is-owner";
+import { prisma } from "@/lib/prisma";
+import { ticketsPath } from "@/paths";
 
 export async function deleteTicket(id: string): Promise<ActionState> {
   const session = await getAuthOrRedirect();

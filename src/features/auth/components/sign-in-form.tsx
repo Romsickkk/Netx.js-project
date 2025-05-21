@@ -21,7 +21,7 @@ function SignInForm() {
     if (actionState.status === "SUCCESS") {
       router.push(ticketsPath());
     }
-  }, [actionState]);
+  }, [actionState, router]);
 
   return (
     <Form action={action} actionState={actionState}>

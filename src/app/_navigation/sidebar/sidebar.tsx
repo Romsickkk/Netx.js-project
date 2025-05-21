@@ -1,14 +1,15 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
+
+import { cn } from "@/lib/utils";
+import { singInPath, singUpPath } from "@/paths";
+import { getActivePath } from "@/utils/get-active-path";
+
 import { navitems } from "./constants";
 import { SidebarItem } from "./sidebar-item";
-
-import { useSession } from "next-auth/react";
-import { usePathname } from "next/navigation";
-import { getActivePath } from "@/utils/get-active-path";
-import { singInPath, singUpPath } from "@/paths";
 
 function Sidebar() {
   const { data: session, status } = useSession();

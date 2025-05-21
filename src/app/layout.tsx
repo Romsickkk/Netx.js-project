@@ -3,12 +3,12 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
+import Header from "@/app/_navigation/Header";
 import ThemeProvider from "@/components/theme/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
-import Header from "@/app/_navigation/Header";
 
-import SessionProvider from "./api/auth/lib/session-provider";
 import Sidebar from "./_navigation/sidebar/sidebar";
+import SessionProvider from "./api/auth/lib/session-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

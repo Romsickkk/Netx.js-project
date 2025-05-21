@@ -1,5 +1,7 @@
-import Heading from "@/ui/Heading";
 import React from "react";
+
+import Heading from "@/ui/Heading";
+
 import AccountTabs from "../_navigation/tabs";
 
 function PasswordPage() {

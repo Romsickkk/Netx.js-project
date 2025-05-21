@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { cloneElement } from "react";
-import { buttonVariants } from "@/components/ui/button";
 
+import { buttonVariants } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
+
 import { closedClassName } from "./constants";
 import { NavItem } from "./types";
-import { Separator } from "@/components/ui/separator";
 
 type SidebarItemProps = {
   isOpen: boolean;
@@ -25,10 +26,7 @@ const SidebarItem = ({ isOpen, isActive, navItem }: SidebarItemProps) => {
           isActive && "bg-muted font-bold hover:bg-muted"
         )}
       >
-        {navItem.icon &&
-          cloneElement(navItem.icon, {
-            className: "h-5 w-5",
-          })}
+        {navItem.icon && cloneElement(navItem.icon)}
         <span
           className={cn(
             "absolute left-12 text-base duration-200",

@@ -1,13 +1,10 @@
-import Link from "next/link";
-
-import { ticketsPath } from "@/paths";
-import Heading from "@/ui/Heading";
+import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import TicketList from "@/features/ticket/components/ticket-list";
 
+import TicketList from "@/features/ticket/components/ticket-list";
+import Heading from "@/ui/Heading";
 import Placeholder from "@/ui/Placeholder";
 import Spinner from "@/ui/Spinner";
-import { Suspense } from "react";
 
 async function HomePage() {
   return (

@@ -2,13 +2,12 @@ import { notFound } from "next/navigation";
 import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/app/api/auth/lib/auth";
+import { ClientBreadcrumbs } from "@/components/ui/client-breadcrumbs";
+import { Separator } from "@/components/ui/separator";
 import { isOwner } from "@/features/auth/utils/is-owner";
 import TicketUpsertForm from "@/features/ticket/components/ticket-upsert-form";
 import { getTicket } from "@/features/ticket/queries/get-ticket";
 import CardCompact from "@/ui/card-compact";
-
-import { ClientBreadcrumbs } from "@/components/ui/client-breadcrumbs";
-import { Separator } from "@/components/ui/separator";
 
 async function TicketEditPage({
   params,

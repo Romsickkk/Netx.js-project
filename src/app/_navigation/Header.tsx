@@ -5,7 +5,8 @@ import { useSession } from "next-auth/react";
 
 import ThemeSwitcher from "@/components/theme/theme-switcher";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { homePath, singInPath, singUpPath, ticketsPath } from "@/paths";
+import { homePath, singInPath, singUpPath } from "@/paths";
+
 import AccountDropdown from "./account-dropdown";
 
 function Header() {

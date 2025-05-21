@@ -1,5 +1,10 @@
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { LucideLock, LucideLogOut, LucideUser } from "lucide-react";
+import Link from "next/link";
+import { User } from "next-auth";
+import { signOut } from "next-auth/react";
+import React from "react";
 
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,11 +14,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { accountPasswordPath, accountProfilePath, singInPath } from "@/paths";
-import { LucideLock, LucideLogOut, LucideUser } from "lucide-react";
-import { User } from "next-auth";
-import { signOut } from "next-auth/react";
-import Link from "next/link";
-import React from "react";
 type AccountDropdownProps = {
   user: User;
 };

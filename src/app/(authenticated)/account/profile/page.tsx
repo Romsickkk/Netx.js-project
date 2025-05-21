@@ -1,4 +1,5 @@
 import Heading from "@/ui/Heading";
+
 import AccountTabs from "../_navigation/tabs";
 
 function ProfilePage() {
