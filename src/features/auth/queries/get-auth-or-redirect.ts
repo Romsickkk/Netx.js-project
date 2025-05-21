@@ -10,4 +10,6 @@ export async function getAuthOrRedirect() {
   if (!session?.user) {
     redirect(singInPath());
   }
+
+  return session;
 }

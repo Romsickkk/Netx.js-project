@@ -112,17 +112,6 @@
 }
 
 @layer utilities {
-  .bg-gradient-radial {
-    background-image: radial-gradient(var(--tw-gradient-stops));
-  }
-
-  .bg-gradient-conic {
-    background-image: conic-gradient(
-      from 188deg at 50% 50%,
-      var(--tw-gradient-stops)
-    );
-  }
-
   @keyframes fade-in-from-top {
     0% {
       opacity: 0;
@@ -142,11 +131,34 @@
       transform: translateY(0);
     }
   }
+  @keyframes sidebar-from-left {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
   .animate-fade-in-from-top {
     animation: fade-in-from-top 0.5s ease-in-out;
   }
   .animate-header-from-top {
     animation: header-from-top 0.5s ease-out;
+  }
+  .animate-sidebar-from-left {
+    animation: sidebar-from-left 0.5s ease-out;
+  }
+
+  .bg-gradient-radial {
+    background-image: radial-gradient(var(--tw-gradient-stops));
+  }
+
+  .bg-gradient-conic {
+    background-image: conic-gradient(
+      from 188deg at 50% 50%,
+      var(--tw-gradient-stops)
+    );
   }
 }
 

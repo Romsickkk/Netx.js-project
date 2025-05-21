@@ -1,11 +1,12 @@
 "use client";
-import { LucideHouse, LucideLogOut } from "lucide-react";
+import { LucideHouse } from "lucide-react";
 import Link from "next/link";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 import ThemeSwitcher from "@/components/theme/theme-switcher";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { homePath, singInPath, singUpPath, ticketsPath } from "@/paths";
+import AccountDropdown from "./account-dropdown";
 
 function Header() {
   const { data: session, status } = useSession();
@@ -17,18 +18,7 @@ function Header() {
       <ThemeSwitcher />
       {session ? (
         <>
-          <Link
-            href={ticketsPath()}
-            className={buttonVariants({ variant: "default" })}
-          >
-            Tickets
-          </Link>
-          <Button
-            onClick={() => signOut({ callbackUrl: singInPath() })}
-            variant="outline"
-          >
-            Log Out <LucideLogOut />
-          </Button>
+          <AccountDropdown user={session.user} />
         </>
       ) : (
         <>
