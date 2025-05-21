@@ -34,7 +34,6 @@ function TicketUpsertForm({ ticket }: TicketUpsertFormProps) {
 
   return (
     <Form action={action} actionState={actionState} onSuccsess={handleSuccess}>
-      {/* <Input name="id" type="hidden" defaultValue={ticket.id} /> */}{" "}
       <Label htmlFor="title">Title</Label>
       <Input
         id="content"

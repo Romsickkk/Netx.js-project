@@ -37,9 +37,10 @@ function TicketMoreMenu({ ticket, trigger }: TicketMoreMenuProps) {
     const promise = updateTicketStatus(ticket.id, value as TicketStatus);
     toast.promise(promise, {
       loading: "Updating status...",
-      success: "Status ipdated",
+
       error: "Failed to update status",
     });
+
     const result = await promise;
     if (result.status === "ERROR") {
       toast.error(result.message);

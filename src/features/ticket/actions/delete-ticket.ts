@@ -6,19 +6,32 @@ import { setCookieByKey } from "@/actions/cookies";
 import {
   ActionState,
   fromErrorToActionState,
+  toActionState,
 } from "@/components/utils/to-action-state";
+import { getAuthOrRedirect } from "@/features/auth/queries/get-auth-or-redirect";
+import { isOwner } from "@/features/auth/utils/is-owner";
 import { prisma } from "@/lib/prisma";
 import { ticketsPath } from "@/paths";
 
 export async function deleteTicket(id: string): Promise<ActionState> {
+  const session = await getAuthOrRedirect();
+
   try {
+    if (id) {
+      const ticket = await prisma.ticket.findUnique({
+        where: {
+          id,
+        },
+      });
+
+      if (!ticket || !isOwner(session.user, ticket))
+        return toActionState("ERROR", "Not authorized");
+    }
+
     await prisma.ticket.delete({
       where: { id },
     });
-    console.log("not err");
   } catch (error) {
-    console.log("err");
-
     return fromErrorToActionState(error);
   }
 

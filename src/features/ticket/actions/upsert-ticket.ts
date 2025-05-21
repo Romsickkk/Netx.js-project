@@ -10,6 +10,8 @@ import {
   fromErrorToActionState,
   toActionState,
 } from "@/components/utils/to-action-state";
+import { getAuthOrRedirect } from "@/features/auth/queries/get-auth-or-redirect";
+import { isOwner } from "@/features/auth/utils/is-owner";
 import { prisma } from "@/lib/prisma";
 import { ticketPath, ticketsPath } from "@/paths";
 import { toCent } from "@/utils/currency";
@@ -26,7 +28,20 @@ export async function upsertTicket(
   _actionState: ActionState,
   formData: FormData
 ) {
+  const session = await getAuthOrRedirect();
+
   try {
+    if (id) {
+      const ticket = await prisma.ticket.findUnique({
+        where: {
+          id,
+        },
+      });
+
+      if (!ticket || !isOwner(session.user, ticket))
+        return toActionState("ERROR", "Not authorized");
+    }
+
     const data = upsertTicketSchema.parse({
       title: formData.get("title"),
       content: formData.get("content"),
@@ -36,6 +51,7 @@ export async function upsertTicket(
 
     const dbData = {
       ...data,
+      userId: session.user.id,
       bounty: toCent(data.bounty),
     };
 
