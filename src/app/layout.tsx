@@ -2,12 +2,14 @@ import "./globals.css";
 
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import Header from "@/app/_navigation/Header";
 import ThemeProvider from "@/components/theme/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 
 import Sidebar from "./_navigation/sidebar/sidebar";
+import ReactQueryProvider from "./_providers/react-query/react-query-provider";
 import SessionProvider from "./api/auth/lib/session-provider";
 
 const geistSans = Geist({
@@ -37,14 +39,17 @@ export default function RootLayout({
       >
         <SessionProvider>
           <ThemeProvider>
-            <Header />
-
-            <div className="flex h-screen overflow-hidden border-collapse">
-              <Sidebar />
-              <main className="min-h-screen flex-1 overflow-y-auto overflow-x-hidden py-24 px-8 bg-secondary/20 flex flex-col">
-                {children}
-              </main>
-            </div>
+            <ReactQueryProvider>
+              <Header />
+              <NuqsAdapter>
+                <div className="flex h-screen overflow-hidden border-collapse">
+                  <Sidebar />
+                  <main className="min-h-screen flex-1 overflow-y-auto overflow-x-hidden py-24 px-8 bg-secondary/20 flex flex-col">
+                    {children}
+                  </main>
+                </div>
+              </NuqsAdapter>
+            </ReactQueryProvider>
             <Toaster expand />
           </ThemeProvider>
         </SessionProvider>

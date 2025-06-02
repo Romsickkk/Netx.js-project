@@ -17,9 +17,23 @@ import { ticketPath, ticketsPath } from "@/paths";
 import { toCent } from "@/utils/currency";
 
 const upsertTicketSchema = z.object({
-  title: z.string().min(1).max(191),
-  content: z.string().min(1).max(1024),
-  deadline: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "is required"),
+  title: z
+    .string()
+    .min(1)
+    .max(50)
+    .transform((val) => val.trim())
+    .refine((val) => val.trim().length > 0, {
+      message: "A field cannot consist only of spaces",
+    }),
+  content: z
+    .string()
+    .min(1)
+    .max(1024)
+    .transform((val) => val.trim())
+    .refine((val) => val.trim().length > 0, {
+      message: "A field cannot consist only of spaces",
+    }),
+  deadline: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "deadline is required"),
   bounty: z.coerce.number().positive(),
 });
 
