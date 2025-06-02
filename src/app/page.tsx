@@ -2,11 +2,16 @@ import { SearchParams } from "nuqs/server";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
+<<<<<<< HEAD
+import { ticketsPath } from "@/paths";
+import Heading from "@/ui/Heading";
+=======
 import TicketList from "@/features/ticket/components/ticket-list";
 import { searchParamsCache } from "@/features/ticket/search-params";
 import Heading from "@/ui/Heading";
 import Placeholder from "@/ui/Placeholder";
 import Spinner from "@/ui/Spinner";
+>>>>>>> dev
 
 type HomePageParams = {
   searchParams: Promise<SearchParams>;

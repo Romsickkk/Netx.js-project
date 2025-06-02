@@ -7,10 +7,14 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import Header from "@/app/_navigation/Header";
 import ThemeProvider from "@/components/theme/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
+<<<<<<< HEAD
+import Header from "@/ui/Header";
+=======
 
 import Sidebar from "./_navigation/sidebar/sidebar";
 import ReactQueryProvider from "./_providers/react-query/react-query-provider";
 import SessionProvider from "./api/auth/lib/session-provider";
+>>>>>>> dev
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
