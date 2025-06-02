@@ -1,24 +1,35 @@
+import { SearchParams } from "nuqs/server";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 import { getAuth } from "@/features/auth/queries/get-auth";
 import TicketList from "@/features/ticket/components/ticket-list";
 import TicketUpsertForm from "@/features/ticket/components/ticket-upsert-form";
-<<<<<<< HEAD:src/app/tickets/page.tsx
+
+import { searchParamsCache } from "@/features/ticket/search-params";
+
+
 import Spinner from "@/ui/Spinner";
 
 import CardCompact from "../../ui/card-compact";
 import Heading from "../../ui/Heading";
 import Placeholder from "../../ui/Placeholder";
-=======
+
+
 import CardCompact from "@/ui/card-compact";
 import Heading from "@/ui/Heading";
 import Placeholder from "@/ui/Placeholder";
 import Spinner from "@/ui/Spinner";
+type TicketsPageParams = {
+  searchParams: Promise<SearchParams>;
+};
 
-async function TicketsPage() {
+async function TicketsPage({ searchParams }: TicketsPageParams) {
   const session = await getAuth();
->>>>>>> dev:src/app/(authenticated)/tickets/page.tsx
+
+  const parsedSearchParams = await searchParamsCache.parse(searchParams);
+
+
 
   return (
     <div className="flex-1 flex flex-col gap-y-8">
@@ -33,7 +44,10 @@ async function TicketsPage() {
 
       <ErrorBoundary fallback={<Placeholder label="Something wrong" />}>
         <Suspense fallback={<Spinner />}>
-          <TicketList userId={session?.user.id} />
+          <TicketList
+            userId={session?.user.id}
+            searchParams={parsedSearchParams}
+          />
         </Suspense>
       </ErrorBoundary>
     </div>

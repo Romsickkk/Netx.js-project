@@ -22,9 +22,8 @@ model User {
   email     String @unique
   password  String
   tickets   Ticket[]
+  comment   Comment[]
 }
-
-
 
 model Ticket {
   id        String         @id @default(cuid())
@@ -37,9 +36,25 @@ model Ticket {
   bounty    Int 
   userId    String
   user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  comments  Comment[]
 
   @@index([userId])
 }
+
+model Comment {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  content   String   @db.VarChar(1024) 
+  ticketId  String
+  ticket    Ticket   @relation(fields: [ticketId],references: [id],onDelete: Cascade)
+  userId    String?
+  user      User?    @relation(fields: [userId],references: [id],onDelete: SetNull)
+
+  @@index([ticketId])
+  @@index([userId])
+}
+
+
 
 enum TicketStatus {
   OPEN

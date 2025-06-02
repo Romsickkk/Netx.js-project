@@ -33,7 +33,7 @@ function TicketUpsertForm({ ticket }: TicketUpsertFormProps) {
   }
 
   return (
-    <Form action={action} actionState={actionState} onSuccsess={handleSuccess}>
+    <Form action={action} actionState={actionState} onSuccess={handleSuccess}>
       <Label htmlFor="title">Title</Label>
       <Input
         id="content"

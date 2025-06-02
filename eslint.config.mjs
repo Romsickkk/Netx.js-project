@@ -3,7 +3,6 @@ import simpleImportSort from "eslint-plugin-simple-import-sort";
 import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
-// Получение __dirname в ES модулях
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -11,7 +10,6 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
-// Конфигурация ESLint
 const config = [
   {
     ignores: ["src/generated/**/*"],
