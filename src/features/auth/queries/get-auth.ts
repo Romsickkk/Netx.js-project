@@ -5,5 +5,5 @@ import { authOptions } from "@/app/api/auth/lib/auth";
 
 export const getAuth = cache(async () => {
   const session = await getServerSession(authOptions as NextAuthOptions);
-  return session ?? null;
+  return session;
 });

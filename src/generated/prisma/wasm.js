@@ -139,6 +139,14 @@ exports.Prisma.TicketScalarFieldEnum = {
   userId: 'userId'
 };
 
+exports.Prisma.CommentScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  content: 'content',
+  ticketId: 'ticketId',
+  userId: 'userId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -148,6 +156,11 @@ exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
 };
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
 exports.TicketStatus = exports.$Enums.TicketStatus = {
   OPEN: 'OPEN',
   IN_PROGRESS: 'IN_PROGRESS',
@@ -156,7 +169,8 @@ exports.TicketStatus = exports.$Enums.TicketStatus = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Ticket: 'Ticket'
+  Ticket: 'Ticket',
+  Comment: 'Comment'
 };
 
 /**

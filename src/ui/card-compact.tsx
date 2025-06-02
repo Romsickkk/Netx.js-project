@@ -13,7 +13,7 @@ type CardCompactProps = {
   title: string;
   description: string;
   content: React.ReactNode;
-  className: string;
+  className?: string;
   footer?: React.ReactNode;
 };
 
